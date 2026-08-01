@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Live Translator</title>
+</head>
+
+<body>
+
+<h1>AI Live Translator</h1>
+
+<button id="start-btn">
+    Start Listening
+</button>
+
+<h2>Original Speech</h2>
+<p id="original-text">
+    ...
+</p>
+
+
+<h2>Translation</h2>
+<p id="translated-text">
+    ...
+</p>
+
+
+{% load static %}
+<script src="{% static 'translator/js/app.js' %}"></script>
+
+</body>
+</html>
