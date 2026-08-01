@@ -15,3 +15,6 @@ db.sqlite3
 
 # Environment variables
 .env
+
+# Audio files
+temp_audio.webm
