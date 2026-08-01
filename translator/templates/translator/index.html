@@ -1,31 +1,33 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <title>Live Translator</title>
-</head>
+    <head>
+        <title>Live Translator</title>
+    </head>
 
-<body>
+    <body>
 
-<h1>AI Live Translator</h1>
+        {% csrf_token %}
 
-<button id="start-btn">
-    Start Listening
-</button>
+        <h1>AI Live Translator</h1>
 
-<h2>Original Speech</h2>
-<p id="original-text">
-    ...
-</p>
+        <button id="start-btn">
+            Start Listening
+        </button>
 
-
-<h2>Translation</h2>
-<p id="translated-text">
-    ...
-</p>
+        <h2>Original Speech</h2>
+        <p id="original-text">
+            ...
+        </p>
 
 
-{% load static %}
-<script src="{% static 'translator/js/app.js' %}"></script>
+        <h2>Translation</h2>
+        <p id="translated-text">
+            ...
+        </p>
 
-</body>
+
+        {% load static %}
+        <script src="{% static 'translator/js/app.js' %}"></script>
+
+    </body>
 </html>
