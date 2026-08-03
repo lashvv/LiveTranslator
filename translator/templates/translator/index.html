@@ -2,6 +2,8 @@
 <html>
     <head>
         <title>Live Translator</title>
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'translator/style/style.css' %}">
     </head>
 
     <body>
@@ -9,24 +11,21 @@
         {% csrf_token %}
 
         <h1>AI Live Translator</h1>
+        <p class="subtitle">Georgian &rarr; English, live during presentations</p>
 
-        <button id="start-btn">
-            Start Listening
-        </button>
+        <button id="start-btn">Start Listening</button>
+        <p class="status" id="status-text"></p>
 
-        <h2>Original Speech</h2>
-        <p id="original-text">
-            ...
-        </p>
+        <div class="caption-box original">
+            <h2>Original Speech</h2>
+            <p id="original-text">Waiting to start...</p>
+        </div>
 
+        <div class="caption-box translated">
+            <h2>Translation</h2>
+            <p id="translated-text">Waiting to start...</p>
+        </div>
 
-        <h2>Translation</h2>
-        <p id="translated-text">
-            ...
-        </p>
-
-
-        {% load static %}
         <script src="{% static 'translator/js/app.js' %}"></script>
 
     </body>

@@ -1,0 +1,74 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  max-width: 800px;
+  margin: 60px auto;
+  padding: 0 20px;
+  color: #1a1a1a;
+  background: #fafafa;
+}
+
+h1 {
+  font-size: 28px;
+  margin-bottom: 4px;
+}
+
+.subtitle {
+  color: #888;
+  margin-bottom: 32px;
+  font-size: 14px;
+}
+
+#start-btn {
+  background: #1a1a1a;
+  color: white;
+  border: none;
+  padding: 12px 28px;
+  font-size: 15px;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-bottom: 12px;
+  transition: background 0.15s;
+}
+#start-btn:hover {
+  background: #333;
+}
+#start-btn.listening {
+  background: #d64545;
+}
+
+.status {
+  font-size: 13px;
+  color: #888;
+  margin-bottom: 32px;
+}
+
+.caption-box {
+  background: white;
+  border: 1px solid #e5e5e5;
+  border-radius: 12px;
+  padding: 20px 24px;
+  margin-bottom: 20px;
+}
+.caption-box h2 {
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #888;
+  margin: 0 0 10px 0;
+}
+.caption-box p {
+  font-size: 19px;
+  line-height: 1.5;
+  margin: 0;
+  min-height: 28px;
+}
+.caption-box.original p {
+  color: #1a1a1a;
+}
+.caption-box.translated p {
+  color: #1a4d8f;
+}/*# sourceMappingURL=style.css.map */
