@@ -1,6 +1,8 @@
 const button = document.getElementById("start-btn");
 const originalText = document.getElementById("original-text");
+const translatedText = document.getElementById("translated-text");
 
+let fullTranslation = "";
 let recorder;
 let stream;
 let listening = false;
@@ -42,6 +44,10 @@ function recordChunk() {
                 fullTranscript += " " + result.transcript;
                 originalText.innerText = fullTranscript;
             }
+            if (result.translation) {
+                fullTranslation += " " + result.translation;
+                translatedText.innerText = fullTranslation;
+            }
         } catch (err) {
             console.error("Upload failed:", err);
         }
@@ -57,7 +63,7 @@ function recordChunk() {
         if (recorder.state !== "inactive") {
             recorder.stop();
         }
-    }, 3000);
+    }, 5000);
 }
 
 button.addEventListener("click", () => {

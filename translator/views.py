@@ -5,7 +5,7 @@ from django.shortcuts import render
 from django.http import JsonResponse
 from google import genai
 from pathlib import Path
-import time
+from google.genai import types
 
 load_dotenv(dotenv_path=Path(__file__).resolve().parent.parent / '.env')
 print("LOADED KEY:", os.environ.get("GEMINI_API_KEY"))
@@ -22,40 +22,33 @@ def upload_audio(request):
         audio = request.FILES.get('audio')
 
         if audio:
-            save_path = os.path.join(settings.BASE_DIR, 'temp_audio.webm')
-
-            with open(save_path, 'wb+') as destination:
-                for chunk in audio.chunks():
-                    destination.write(chunk)
-
-            uploaded_file = client.files.upload(
-                file=save_path,
-                config={"mime_type": "audio/webm"}
-            )
-
-            # Wait for Google to finish processing the file before using it
-            while uploaded_file.state.name == "PROCESSING":
-                time.sleep(0.5)
-                uploaded_file = client.files.get(name=uploaded_file.name)
-
-            if uploaded_file.state.name == "FAILED":
-                return JsonResponse({"error": "File processing failed"}, status=500)
+            audio_bytes = audio.read()
 
             response = client.models.generate_content(
-                model="gemini-3-flash-preview",
+                model="gemini-3.6-flash",
                 contents=[
-                    uploaded_file,
-                    "Transcribe the speech in this audio exactly as spoken, in Georgian. Return only the transcription, nothing else."
-                ]
+                    types.Part.from_bytes(data=audio_bytes, mime_type="audio/webm"),
+                    "Transcribe EXACTLY what is said in this Georgian audio, word for word. "
+                    "Do not correct grammar, do not paraphrase, do not summarize.\n"
+                    "Respond with exactly two lines, nothing else:\n"
+                    "Line 1: the exact Georgian transcript.\n"
+                    "Line 2: the English translation of that transcript.\n"
+                    "Do not add labels, numbering, or any other text."
+                ],
+                config={"temperature": 0}
             )
 
-            transcript = response.text.strip()
+            lines = response.text.strip().split("\n")
+            transcript = lines[0].strip() if len(lines) > 0 else ""
+            translation = lines[1].strip() if len(lines) > 1 else ""
 
             print("Transcript:", transcript)
+            print("Translation:", translation)
 
             return JsonResponse({
                 "status": "received",
-                "transcript": transcript
+                "transcript": transcript,
+                "translation": translation
             })
 
     return JsonResponse({
