@@ -10,9 +10,6 @@ cryptography==50.0.0
 ctranslate2==4.8.1
 distro==1.9.0
 Django==6.0.7
-djangorestframework==3.17.1
-faster-whisper==1.2.1
-ffmpeg-python==0.2.0
 filelock==3.32.2
 flatbuffers==25.12.19
 fsspec==2026.7.0
